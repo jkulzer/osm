@@ -36,12 +36,17 @@ func TestElementID_ids(t *testing.T) {
 	}
 
 	wayID, err := WayID(1).ElementID(1).WayID()
-
+	if err != nil {
+		panic(nil)
+	}
 	if wayID != 1 {
 		t.Errorf("incorrect id: %v", wayID)
 	}
 
 	relationID, err := RelationID(1).ElementID(1).RelationID()
+	if err != nil {
+		panic(nil)
+	}
 	if relationID != 1 {
 		t.Errorf("incorrect id: %v", relationID)
 	}

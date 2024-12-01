@@ -20,6 +20,7 @@
 						go
 						pkg-config
 						zlib
+						golangci-lint
 					]; 
 				};
       }

@@ -87,7 +87,7 @@ func (id ElementID) RelationID() (RelationID, error) {
 func (id ElementID) String() string {
 	elementType, err := id.Type()
 	if err != nil {
-		//TODO
+		return "unknown type"
 	}
 	if id.Version() == 0 {
 		return fmt.Sprintf("%s/%d:-", elementType, id.Ref())
