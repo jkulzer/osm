@@ -8,9 +8,9 @@ import (
 	"os"
 	"reflect"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/osmpbf"
-	"github.com/paulmach/osm/osmxml"
+	"github.com/jkulzer/osm"
+	"github.com/jkulzer/osm/osmpbf"
+	"github.com/jkulzer/osm/osmxml"
 )
 
 func main() {

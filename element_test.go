@@ -27,49 +27,47 @@ func TestElementID_ids(t *testing.T) {
 		t.Errorf("incorrect id: %v", v)
 	}
 
-	if v := NodeID(1).ElementID(1).NodeID(); v != 1 {
-		t.Errorf("incorrect id: %v", v)
+	nodeID, err := NodeID(1).ElementID(1).NodeID()
+	if err != nil {
+		panic(nil)
+	}
+	if nodeID != 1 {
+		t.Errorf("incorrect id: %v", nodeID)
 	}
 
-	if v := WayID(1).ElementID(1).WayID(); v != 1 {
-		t.Errorf("incorrect id: %v", v)
+	wayID, err := WayID(1).ElementID(1).WayID()
+
+	if wayID != 1 {
+		t.Errorf("incorrect id: %v", wayID)
 	}
 
-	if v := RelationID(1).ElementID(1).RelationID(); v != 1 {
-		t.Errorf("incorrect id: %v", v)
+	relationID, err := RelationID(1).ElementID(1).RelationID()
+	if relationID != 1 {
+		t.Errorf("incorrect id: %v", relationID)
 	}
 
 	t.Run("not a node", func(t *testing.T) {
-		defer func() {
-			if r := recover(); r == nil {
-				t.Errorf("should panic?")
-			}
-		}()
-
 		id := WayID(1).ElementID(1)
-		id.NodeID()
+		_, err := id.NodeID()
+		if err == nil {
+			t.Errorf("should return error")
+		}
 	})
 
 	t.Run("not a way", func(t *testing.T) {
-		defer func() {
-			if r := recover(); r == nil {
-				t.Errorf("should panic?")
-			}
-		}()
-
 		id := NodeID(1).ElementID(1)
-		id.WayID()
+		_, err := id.WayID()
+		if err == nil {
+			t.Errorf("should return error")
+		}
 	})
 
 	t.Run("not a relation", func(t *testing.T) {
-		defer func() {
-			if r := recover(); r == nil {
-				t.Errorf("should panic?")
-			}
-		}()
-
 		id := WayID(1).ElementID(1)
-		id.RelationID()
+		_, err := id.RelationID()
+		if err == nil {
+			t.Errorf("should return error")
+		}
 	})
 }
 

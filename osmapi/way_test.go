@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/paulmach/osm"
+	"github.com/jkulzer/osm"
 )
 
 func TestWay_urls(t *testing.T) {

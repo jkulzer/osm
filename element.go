@@ -19,17 +19,18 @@ var (
 type ElementID int64
 
 // Type returns the Type for the element.
-func (id ElementID) Type() Type {
+func (id ElementID) Type() (Type, error) {
 	switch id & typeMask {
 	case nodeMask:
-		return TypeNode
+		return TypeNode, nil
 	case wayMask:
-		return TypeWay
+		return TypeWay, nil
 	case relationMask:
-		return TypeRelation
+		return TypeRelation, nil
 	}
 
-	panic("unknown type")
+	return "", errors.New("unknow type")
+
 }
 
 // Ref return the ID reference for the element. Not unique without the type.
@@ -53,42 +54,46 @@ func (id ElementID) FeatureID() FeatureID {
 }
 
 // NodeID returns the id of this feature as a node id.
-// The function will panic if this element is not of TypeNode.
-func (id ElementID) NodeID() NodeID {
+// The function will error if the element is not a node
+func (id ElementID) NodeID() (NodeID, error) {
 	if id&nodeMask != nodeMask {
-		panic(fmt.Sprintf("not a node: %v", id))
+		return 0, errors.New("not a node: %v" + fmt.Sprint(id))
 	}
 
-	return NodeID(id.Ref())
+	return NodeID(id.Ref()), nil
 }
 
 // WayID returns the id of this feature as a way id.
-// The function will panic if this element is not of TypeWay.
-func (id ElementID) WayID() WayID {
+// The function will error if the element is not a way
+func (id ElementID) WayID() (WayID, error) {
 	if id&wayMask != wayMask {
-		panic(fmt.Sprintf("not a way: %v", id))
+		return 0, errors.New(fmt.Sprint("not a way: %id", id))
 	}
 
-	return WayID(id.Ref())
+	return WayID(id.Ref()), nil
 }
 
 // RelationID returns the id of this feature as a relation id.
-// The function will panic if this element is not of TypeRelation.
-func (id ElementID) RelationID() RelationID {
+// The function will error if the element is not a relation
+func (id ElementID) RelationID() (RelationID, error) {
 	if int64(id)&relationMask != relationMask {
-		panic(fmt.Sprintf("not a relation: %v", id))
+		return 0, errors.New(fmt.Sprint("not a relation: %id", id))
 	}
 
-	return RelationID(id.Ref())
+	return RelationID(id.Ref()), nil
 }
 
 // String returns "type/ref:version" for the element.
 func (id ElementID) String() string {
+	elementType, err := id.Type()
+	if err != nil {
+		//TODO
+	}
 	if id.Version() == 0 {
-		return fmt.Sprintf("%s/%d:-", id.Type(), id.Ref())
+		return fmt.Sprintf("%s/%d:-", elementType, id.Ref())
 	}
 
-	return fmt.Sprintf("%s/%d:%d", id.Type(), id.Ref(), id.Version())
+	return fmt.Sprintf("%s/%d:%d", elementType, id.Ref(), id.Version())
 }
 
 // ParseElementID takes a string and tries to determine the element id from it.

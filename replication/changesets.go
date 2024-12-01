@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/osmxml"
+	"github.com/jkulzer/osm"
+	"github.com/jkulzer/osm/osmxml"
 )
 
 // ChangesetSeqNum indicates the sequence of the changeset replication found here:

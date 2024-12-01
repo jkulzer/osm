@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/paulmach/osm"
+	"github.com/jkulzer/osm"
 )
 
 func TestChange_create(t *testing.T) {

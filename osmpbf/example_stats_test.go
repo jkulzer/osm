@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/osmpbf"
+	"github.com/jkulzer/osm"
+	"github.com/jkulzer/osm/osmpbf"
 )
 
 // ExampleStats demonstrates how to read a full file and gather some stats.
@@ -117,7 +117,11 @@ func Example_stats() {
 	fmt.Println("relation id min:", stats.Ranges[osm.TypeRelation].Min)
 	fmt.Println("relation id max:", stats.Ranges[osm.TypeRelation].Max)
 	fmt.Println("keyval pairs max:", stats.MaxTags)
-	fmt.Println("keyval pairs max object:", stats.MaxTagsID.Type(), stats.MaxTagsID.Ref())
+	elementType, err := stats.MaxTagsID.Type()
+	if err != nil {
+		panic(nil)
+	}
+	fmt.Println("keyval pairs max object:", elementType, stats.MaxTagsID.Ref())
 	fmt.Println("noderefs max:", maxNodeRefs)
 	fmt.Println("noderefs max object: way", maxNodeRefsID)
 	fmt.Println("relrefs max:", maxRelRefs)
@@ -172,7 +176,11 @@ func newElementStats() *elementStats {
 }
 
 func (s *elementStats) Add(id osm.ElementID, tags osm.Tags) {
-	s.Ranges[id.Type()].Add(id.Ref())
+	elementType, err := id.Type()
+	if err != nil {
+		panic(err)
+	}
+	s.Ranges[elementType].Add(id.Ref())
 
 	if v := id.Version(); v > s.MaxVersion {
 		s.MaxVersion = v

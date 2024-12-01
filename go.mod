@@ -1,4 +1,4 @@
-module github.com/paulmach/osm
+module github.com/jkulzer/osm
 
 go 1.16
 

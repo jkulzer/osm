@@ -23,8 +23,12 @@ func TestFeatureID_ids(t *testing.T) {
 	}
 
 	eid := id.ElementID(10)
-	if v := eid.Type(); v != TypeNode {
-		t.Errorf("incorrect type: %v", v)
+	elementType, err := eid.Type()
+	if err != nil {
+		panic(nil)
+	}
+	if elementType != TypeNode {
+		t.Errorf("incorrect type: %v", elementType)
 	}
 
 	if v := eid.Ref(); v != 1 {

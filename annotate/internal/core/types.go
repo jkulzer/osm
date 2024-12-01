@@ -3,8 +3,8 @@ package core
 import (
 	"time"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/annotate/shared"
+	"github.com/jkulzer/osm"
+	"github.com/jkulzer/osm/annotate/shared"
 )
 
 // A Parent is something that holds children. ie. ways have nodes as children

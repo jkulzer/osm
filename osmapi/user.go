@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/paulmach/osm"
+	"github.com/jkulzer/osm"
 )
 
 // User returns the user from the osm rest api.

@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/paulmach/osm"
-	"github.com/paulmach/osm/annotate/internal/core"
-	"github.com/paulmach/osm/annotate/shared"
+	"github.com/jkulzer/osm"
+	"github.com/jkulzer/osm/annotate/internal/core"
+	"github.com/jkulzer/osm/annotate/shared"
 )
 
 // HistoryAsChildrenDatasourcer is an advanced data source that
