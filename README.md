@@ -1,7 +1,7 @@
--# osm 
-
-# FORK
+# THIS IS A FORK
 I have forked this library from [paulmach/osm](https://github.com/jkulzer/osm). I encountered a problem with the decoder always using the CGO zlib implementation when enabling CGO. Also getting the Node/Way/Relation ID from the Element ID can always result in a panic, which I wanted to change. Both things would change the function signatures quite dramatically and I didn't want to introduce that much a breaking change.
+
+# osm 
 
 This package is a general purpose library for reading, writing and working
 with [OpenStreetMap](https://osm.org) data in Go (golang). It has the ability to:
